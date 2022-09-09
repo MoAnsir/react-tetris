@@ -1,12 +1,31 @@
-import { useState } from "react";
-import { randomTetromino } from "../JS/tetrisBlocks";
+import { useState, useEffect } from "react";
+import { createStage } from "../JS/gameHelpers";
 
-export const useStage = () => {
-  const [player, setPlayer] = useState({
-    pos: { x: 0, y: 0 },
-    tetrisBlock: randomTetromino().shape,
-    collided: false,
-  });
+export const useStage = (player, resetPlayer) => {
+  const [stage, setStage] = useState(createStage());
 
-  return [player];
+  useEffect(() => {
+    const updateStage = (prevStage) => {
+      // First flush the stage
+      const newStage = prevStage.map((row) =>
+        row.map((cell) => (cell[1] === "clear" ? [0, "clear"] : cell))
+      );
+
+      player.tetrisBlock.forEach((row, y) => {
+        row.forEach((value, x) => {
+          if (value !== 0) {
+            newStage[y + player.pos.y][x + player.pos.x] = [
+              value,
+              `${player.collided ? "merged" : "clear"}`,
+            ];
+          }
+        });
+      });
+
+      return newStage;
+    };
+    setStage((prev) => updateStage(prev));
+  }, [player.collided, player.pos.x, player.pos.y, player.tetrisBlock]);
+
+  return [stage, setStage];
 };
