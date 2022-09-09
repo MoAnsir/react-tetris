@@ -1,0 +1,20 @@
+@import "./const.scss";
+.cell_0 {
+  width: auto;
+  background-color: $color-0;
+  border: 0px solid;
+  border-bottom-color: $color-border-bottom-0;
+  border-right-color: $color-border-right-0;
+  border-left-color: $color-border-left-0;
+  border-top-color: $color-border-top-0;
+}
+
+.cell_I {
+  width: auto;
+  background-color: $color-I;
+  border: 0px solid;
+  border-bottom-color: $color-border-bottom-I;
+  border-right-color: $color-border-right-I;
+  border-left-color: $color-border-left-I;
+  border-top-color: $color-border-top-I;
+}
