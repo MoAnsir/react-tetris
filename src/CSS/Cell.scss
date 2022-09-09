@@ -1,80 +1,72 @@
 @import "./const.scss";
-.cell_0 {
-  width: auto;
-  background-color: $color-0;
-  border: 0px solid;
-  border-bottom-color: $color-border-bottom-0;
-  border-right-color: $color-border-right-0;
-  border-left-color: $color-border-left-0;
-  border-top-color: $color-border-top-0;
-}
 
-.cell_I {
+.cell {
   width: auto;
-  background-color: $color-I;
   border: 0px solid;
-  border-bottom-color: $color-border-bottom-I;
-  border-right-color: $color-border-right-I;
-  border-left-color: $color-border-left-I;
-  border-top-color: $color-border-top-I;
-}
+  border-top-width: 3px;
+  border-right-width: 3px;
 
-.cell_J {
-  width: auto;
-  background-color: $color-J;
-  border: 0px solid;
-  border-bottom-color: $color-border-bottom-J;
-  border-right-color: $color-border-right-J;
-  border-left-color: $color-border-left-J;
-  border-top-color: $color-border-top-J;
-}
+  &_0 {
+    background-color: $color-0;
+    border-bottom-color: $color-border-bottom-0;
+    border-right-color: $color-border-right-0;
+    border-left-color: $color-border-left-0;
+    border-top-color: $color-border-top-0;
+  }
 
-.cell_L {
-  width: auto;
-  background-color: $color-L;
-  border: 0px solid;
-  border-bottom-color: $color-border-bottom-L;
-  border-right-color: $color-border-right-L;
-  border-left-color: $color-border-left-L;
-  border-top-color: $color-border-top-L;
-}
+  &_I {
+    background-color: $color-I;
+    border-bottom-color: $color-border-bottom-I;
+    border-right-color: $color-border-right-I;
+    border-left-color: $color-border-left-I;
+    border-top-color: $color-border-top-I;
+  }
 
-.cell_O {
-  width: auto;
-  background-color: $color-O;
-  border: 0px solid;
-  border-bottom-color: $color-border-bottom-O;
-  border-right-color: $color-border-right-O;
-  border-left-color: $color-border-left-O;
-  border-top-color: $color-border-top-O;
-}
+  &_J {
+    background-color: $color-J;
+    border-bottom-color: $color-border-bottom-J;
+    border-right-color: $color-border-right-J;
+    border-left-color: $color-border-left-J;
+    border-top-color: $color-border-top-J;
+  }
 
-.cell_S {
-  width: auto;
-  background-color: $color-S;
-  border: 0px solid;
-  border-bottom-color: $color-border-bottom-S;
-  border-right-color: $color-border-right-S;
-  border-left-color: $color-border-left-S;
-  border-top-color: $color-border-top-S;
-}
+  &_L {
+    background-color: $color-L;
+    border-bottom-color: $color-border-bottom-L;
+    border-right-color: $color-border-right-L;
+    border-left-color: $color-border-left-L;
+    border-top-color: $color-border-top-L;
+  }
 
-.cell_T {
-  width: auto;
-  background-color: $color-T;
-  border: 0px solid;
-  border-bottom-color: $color-border-bottom-T;
-  border-right-color: $color-border-right-T;
-  border-left-color: $color-border-left-T;
-  border-top-color: $color-border-top-T;
-}
+  &_O {
+    background-color: $color-O;
+    border-bottom-color: $color-border-bottom-O;
+    border-right-color: $color-border-right-O;
+    border-left-color: $color-border-left-O;
+    border-top-color: $color-border-top-O;
+  }
 
-.cell_Z {
-  width: auto;
-  background-color: $color-Z;
-  border: 0px solid;
-  border-bottom-color: $color-border-bottom-Z;
-  border-right-color: $color-border-right-Z;
-  border-left-color: $color-border-left-Z;
-  border-top-color: $color-border-top-Z;
+  &_S {
+    background-color: $color-S;
+    border-bottom-color: $color-border-bottom-S;
+    border-right-color: $color-border-right-S;
+    border-left-color: $color-border-left-S;
+    border-top-color: $color-border-top-S;
+  }
+
+  &_T {
+    background-color: $color-T;
+    border-bottom-color: $color-border-bottom-T;
+    border-right-color: $color-border-right-T;
+    border-left-color: $color-border-left-T;
+    border-top-color: $color-border-top-T;
+  }
+
+  &_Z {
+    background-color: $color-Z;
+    border-bottom-color: $color-border-bottom-Z;
+    border-right-color: $color-border-right-Z;
+    border-left-color: $color-border-left-Z;
+    border-top-color: $color-border-top-Z;
+  }
 }
