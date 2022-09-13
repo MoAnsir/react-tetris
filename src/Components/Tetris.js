@@ -57,7 +57,6 @@ const Tetris = () => {
   const downKeyRelease = ({ keycode }) => {
     if (!gameOver) {
       //if (keycode === 40) {
-
       setDropTime(1000 / (level + 1) + 200);
       //}
     }
