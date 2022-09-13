@@ -11,7 +11,6 @@ export const usePlayer = () => {
   });
 
   const rotate = (matrix, dir) => {
-    console.log("🚀 ~ file: usePlayer.js ~ line 14 ~ rotate ~ matrix", matrix);
     const rotatedBlock = matrix.map((_, index) =>
       matrix.map((col) => col[index])
     );
@@ -20,10 +19,6 @@ export const usePlayer = () => {
   };
 
   const playerRotate = (stage, dir) => {
-    console.log(
-      "🚀 ~ file: usePlayer.js ~ line 22 ~ playerRotate ~ stage",
-      player
-    );
     const clonedPlayer = cloneDeep(player);
 
     clonedPlayer.tetrisBlock = rotate(clonedPlayer.tetrisBlock, dir);
