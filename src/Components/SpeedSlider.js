@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import "../CSS/SpeedSlider.scss";
 
 const SpeedSlider = ({ speedAdjust }) => {
-  //const [sliderVal, setSliderVal] = useState("");
+  const [sliderVal, setSliderVal] = useState("");
 
   const handleSlider = ({ target }) => {
-    //setSliderVal(target.value);
+    setSliderVal(target.value);
     speedAdjust(target.value);
   };
 
@@ -16,7 +16,7 @@ const SpeedSlider = ({ speedAdjust }) => {
         type="range"
         min="100"
         max="1500"
-        // value={sliderVal}
+        value={sliderVal}
         list="tickmarks"
         onChange={(e) => handleSlider(e)}
       />

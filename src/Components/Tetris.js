@@ -8,8 +8,18 @@ import { useInterval } from "../Hooks/useInterval";
 import { usePlayer } from "../Hooks/usePlayer";
 import { useStage } from "../Hooks/useStage";
 import { useGameStatus } from "../Hooks/useGameStatus";
-import { createStage, checkCollision } from "../JS/gameHelpers";
+import {
+  createStage,
+  checkCollision,
+  MAGT1,
+  MAGT2,
+  MAGT3,
+  MAGT4,
+  MAGT5,
+} from "../JS/gameHelpers";
 import "../CSS/Tetris.scss";
+
+// Add in highest score. Save to local storage and have it persist on machine.
 
 const Tetris = () => {
   const [dropTime, setDropTime] = useState(null);
@@ -29,6 +39,7 @@ const Tetris = () => {
 
   useEffect(() => {
     setDropTime(speedSlider);
+    // If she get to a certain score that add in the custom speeds using the MAGT's
   }, [speedSlider]);
 
   const startGame = () => {
@@ -47,7 +58,8 @@ const Tetris = () => {
     if (rows > (level + 1) * 10) {
       setLevel((prev) => prev + 1);
 
-      setDropTime(1000 / (level + 1) + 200);
+      //setDropTime(speedSlider / (level + 1) + 200);
+      setDropTime(speedSlider);
     }
 
     if (!checkCollision(player, stage, { x: 0, y: 1 })) {
@@ -65,7 +77,8 @@ const Tetris = () => {
   const downKeyRelease = ({ keycode }) => {
     if (!gameOver) {
       //if (keycode === 40) {
-      setDropTime(1000 / (level + 1) + 200);
+      //setDropTime(speedSlider / (level + 1) + 200);
+      setDropTime(speedSlider);
       //}
     }
   };
