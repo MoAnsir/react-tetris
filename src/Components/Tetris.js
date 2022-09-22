@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import Stage from "./Stage";
 import Display from "./Display";
+import SpeedSlider from "./SpeedSlider";
 import StartButton from "./StartButton";
 import { useInterval } from "../Hooks/useInterval";
 import { usePlayer } from "../Hooks/usePlayer";
@@ -103,6 +104,7 @@ const Tetris = () => {
               <Display text={`Score: ${score}`} />
               <Display text={`Rows: ${rows}`} />
               <Display text={`Level: ${level}`} />
+              <SpeedSlider />
             </div>
           )}
 
