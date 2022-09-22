@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Stage from "./Stage";
 import Display from "./Display";
@@ -14,6 +14,7 @@ import "../CSS/Tetris.scss";
 const Tetris = () => {
   const [dropTime, setDropTime] = useState(null);
   const [gameOver, setGameOver] = useState(false);
+  const [speedSlider, useSpeedSlider] = useState(500);
 
   const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
   const [stage, setStage, rowsCleared] = useStage(player, resetPlayer);
@@ -26,9 +27,15 @@ const Tetris = () => {
     }
   };
 
+  useEffect(() => {
+    setDropTime(speedSlider);
+  }, [speedSlider]);
+
   const startGame = () => {
     setStage(createStage());
-    setDropTime(1000);
+    //control speed
+    //setDropTime(100);
+    setDropTime(speedSlider);
     resetPlayer();
     setGameOver(false);
     setScore(0);
@@ -104,7 +111,7 @@ const Tetris = () => {
               <Display text={`Score: ${score}`} />
               <Display text={`Rows: ${rows}`} />
               <Display text={`Level: ${level}`} />
-              <SpeedSlider />
+              <SpeedSlider speedAdjust={useSpeedSlider} />
             </div>
           )}
 
