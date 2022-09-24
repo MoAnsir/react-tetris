@@ -58,9 +58,14 @@ export const TETRISBLOCKS = {
   },
 };
 
-export const randomTetromino = () => {
+export const randomTetromino = (devMode) => {
   const tetrisBlock = "IJLOSTZ";
   const randTetrisBlock =
     tetrisBlock[Math.floor(Math.random() * tetrisBlock.length)];
-  return TETRISBLOCKS[randTetrisBlock];
+
+  if (devMode) {
+    return TETRISBLOCKS["I"];
+  } else {
+    return TETRISBLOCKS[randTetrisBlock];
+  }
 };

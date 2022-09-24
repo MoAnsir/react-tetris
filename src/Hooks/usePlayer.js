@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { cloneDeep } from "lodash";
 import { TETRISBLOCKS, randomTetromino, tetrisBlock } from "../JS/tetrisBlocks";
-import { checkCollision, STAGE_WIDTH } from "../JS/gameHelpers";
+import { checkCollision, STAGE_WIDTH, DEV_MODE } from "../JS/gameHelpers";
 
 export const usePlayer = () => {
   const [player, setPlayer] = useState({
@@ -52,7 +52,10 @@ export const usePlayer = () => {
   const resetPlayer = useCallback(() => {
     setPlayer({
       pos: { x: STAGE_WIDTH / 2 - 2, y: 0 },
-      tetrisBlock: randomTetromino().shape,
+      // Normal mode
+      //tetrisBlock: randomTetromino().shape,
+      // Dev mode
+      tetrisBlock: randomTetromino(DEV_MODE).shape,
       collided: false,
     });
   }, []);
