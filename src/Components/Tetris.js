@@ -4,6 +4,8 @@ import Stage from "./Stage";
 import Display from "./Display";
 import SpeedSlider from "./SpeedSlider";
 import StartButton from "./StartButton";
+import LeaderBoard from "./LeaderBoard";
+import UserNameModal from "./UserNameModal";
 import { useInterval } from "../Hooks/useInterval";
 import { usePlayer } from "../Hooks/usePlayer";
 import { useStage } from "../Hooks/useStage";
@@ -18,6 +20,7 @@ import {
   MAGT5,
 } from "../JS/gameHelpers";
 import "../CSS/Tetris.scss";
+import { get, set } from "idb-keyval";
 
 // Add in highest score. Save to local storage and have it persist on machine.
 
@@ -25,11 +28,26 @@ const Tetris = () => {
   const [dropTime, setDropTime] = useState(null);
   const [gameOver, setGameOver] = useState(false);
   const [speedSlider, useSpeedSlider] = useState(500);
+  const [highestScore, setHighestScore] = useState(0);
 
   const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
+  const [showModal, setShowModal] = useState(false);
   const [stage, setStage, rowsCleared] = useStage(player, resetPlayer);
   const [score, setScore, rows, setRows, level, setLevel] =
     useGameStatus(rowsCleared);
+
+  useEffect(() => {
+    get("Tetris-Score").then((val) => {
+      setHighestScore(val || 0);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (score > highestScore) {
+      set("Tetris-Score", score);
+      setHighestScore(score);
+    }
+  }, [score, gameOver]);
 
   const movePlayer = (dir) => {
     if (!checkCollision(player, stage, { x: dir, y: 0 })) {
@@ -54,6 +72,10 @@ const Tetris = () => {
     setRows(0);
   };
 
+  const handleKeyPress = (e) => {
+    // bring up a modal, take a name input from the user, click save button to close and log.
+  };
+
   const drop = () => {
     if (rows > (level + 1) * 10) {
       setLevel((prev) => prev + 1);
@@ -68,6 +90,7 @@ const Tetris = () => {
       if (player.pos.y <= 0) {
         console.log("GAME OVER!!!!");
         setGameOver(true);
+        setShowModal(!showModal);
         setDropTime(null);
       }
       updatePlayerPos({ x: 0, y: 0, collided: true });
@@ -76,10 +99,10 @@ const Tetris = () => {
 
   const downKeyRelease = ({ keycode }) => {
     if (!gameOver) {
-      //if (keycode === 40) {
-      //setDropTime(speedSlider / (level + 1) + 200);
-      setDropTime(speedSlider);
-      //}
+      if (keycode === 40) {
+        //setDropTime(speedSlider / (level + 1) + 200);
+        setDropTime(speedSlider);
+      }
     }
   };
 
@@ -99,6 +122,9 @@ const Tetris = () => {
       } else if (keyCode === 38) {
         playerRotate(stage, 1);
       }
+    }
+    if (keyCode === 13) {
+      startGame();
     }
   };
 
@@ -124,6 +150,7 @@ const Tetris = () => {
               <Display text={`Score: ${score}`} />
               <Display text={`Rows: ${rows}`} />
               <Display text={`Level: ${level}`} />
+              <LeaderBoard highestScore={highestScore} />
               <SpeedSlider speedAdjust={useSpeedSlider} />
             </div>
           )}
@@ -131,6 +158,7 @@ const Tetris = () => {
           <StartButton callback={startGame} />
         </aside>
       </div>
+      <UserNameModal showModal={showModal} hideModal={setShowModal} />
     </div>
   );
 };
