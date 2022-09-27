@@ -28,7 +28,8 @@ const Tetris = () => {
   const [dropTime, setDropTime] = useState(null);
   const [gameOver, setGameOver] = useState(false);
   const [speedSlider, useSpeedSlider] = useState(500);
-  const [highestScore, setHighestScore] = useState(0);
+  const [highestScore, setHighestScore] = useState("");
+  const [userSaveData, setUserSaveData] = useState("");
 
   const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
   const [showModal, setShowModal] = useState(false);
@@ -38,16 +39,19 @@ const Tetris = () => {
 
   useEffect(() => {
     get("Tetris-Score").then((val) => {
-      setHighestScore(val || 0);
+      setUserSaveData(val || "");
     });
   }, []);
 
   useEffect(() => {
     if (score > highestScore) {
-      set("Tetris-Score", score);
       setHighestScore(score);
     }
-  }, [score, gameOver]);
+  }, [score, highestScore]);
+
+  useEffect(() => {
+    set("Tetris-Score", userSaveData);
+  }, [userSaveData, gameOver]);
 
   const movePlayer = (dir) => {
     if (!checkCollision(player, stage, { x: dir, y: 0 })) {
@@ -67,13 +71,11 @@ const Tetris = () => {
     setDropTime(speedSlider);
     resetPlayer();
     setGameOver(false);
+    //setScore({id: 1, name: "Maggie", score: 1200}); // What it should look like
+    //setScore({id: 2, name: "", score: 0}); // Default value
     setScore(0);
     setLevel(0);
     setRows(0);
-  };
-
-  const handleKeyPress = (e) => {
-    // bring up a modal, take a name input from the user, click save button to close and log.
   };
 
   const drop = () => {
@@ -144,21 +146,30 @@ const Tetris = () => {
         <Stage stage={stage} />
         <aside>
           {gameOver ? (
-            <Display gameOver={gameOver} text="Game Over" />
+            <>
+              <Display gameOver={gameOver} text="Game Over" />
+              <LeaderBoard userSaveData={userSaveData} />
+            </>
           ) : (
-            <div>
+            <>
               <Display text={`Score: ${score}`} />
               <Display text={`Rows: ${rows}`} />
               <Display text={`Level: ${level}`} />
-              <LeaderBoard highestScore={highestScore} />
+              <LeaderBoard userSaveData={userSaveData} />
               <SpeedSlider speedAdjust={useSpeedSlider} />
-            </div>
+            </>
           )}
 
           <StartButton callback={startGame} />
         </aside>
       </div>
-      <UserNameModal showModal={showModal} hideModal={setShowModal} />
+      <UserNameModal
+        showModal={showModal}
+        hideModal={setShowModal}
+        userScore={highestScore}
+        userSaveData={userSaveData}
+        setUserSaveData={setUserSaveData}
+      />
     </div>
   );
 };

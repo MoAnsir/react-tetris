@@ -1,6 +1,40 @@
+import { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
+import { v4 as uuidv4 } from "uuid";
 
-function UserNameModal({ showModal, hideModal }) {
+function UserNameModal({
+  showModal,
+  hideModal,
+  userScore,
+  userSaveData,
+  setUserSaveData,
+}) {
+  const [userName, setUserName] = useState("");
+
+  const saveUserData = (e) => {
+    e.preventDefault();
+    if (!userSaveData) {
+      setUserSaveData([
+        {
+          id: uuidv4(),
+          name: userName,
+          score: userScore,
+        },
+      ]);
+    } else if ((userName, userScore)) {
+      setUserSaveData((prev) => [
+        ...prev,
+        {
+          id: uuidv4(),
+          name: userName,
+          score: userScore,
+        },
+      ]);
+    }
+
+    setUserName("");
+  };
+
   return (
     <Modal
       className="note-modal"
@@ -12,7 +46,7 @@ function UserNameModal({ showModal, hideModal }) {
       <div className="modal-postit">
         <Modal.Header closeButton>
           <Modal.Title className="position-absolute start-45">
-            Edit Task
+            Game Over!
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -20,62 +54,33 @@ function UserNameModal({ showModal, hideModal }) {
             <div className="mt-5">
               <label
                 htmlFor="editNoteDesc"
-                className="d-block text-center mb-2"
+                className="d-block text-center mb-2 fs-5"
               >
-                Label
+                Enter Name:
               </label>
               <input
                 type="text"
                 id="editNoteDesc"
                 name="editNoteDesc"
-                className="d-block mx-auto"
-                placeholder="Edit note description"
-              />
-            </div>
-
-            <div className="my-5">
-              <label
-                htmlFor="editNoteContent"
-                className="d-block text-center mb-2"
-              >
-                Label
-              </label>
-              <input
-                type="text"
-                id="editNoteContent"
-                name="editNoteContent"
-                className=" d-block mx-auto"
-                placeholder="Edit note content"
-              />
-            </div>
-
-            <div className="mb-5">
-              <label
-                htmlFor="editNoteTags"
-                className="d-block text-center mb-2"
-              >
-                Label
-              </label>
-              <input
-                type="text"
-                id="editNoteTags"
-                name="editNoteTags"
-                className="d-block mx-auto"
-                placeholder="Edit note tags"
+                className="d-block mx-auto text-center fs-5"
+                placeholder="..."
+                onChange={(e) => {
+                  setUserName(e.target.value);
+                }}
               />
             </div>
           </form>
         </Modal.Body>
         <Modal.Footer>
           <Button
-            variant="secondary"
-            onClick={() => {
+            variant="primary"
+            onClick={(e) => {
               hideModal(!showModal);
+              saveUserData(e);
             }}
           >
-            Close
+            Save
           </Button>
-          <Button variant="primary">Save Changes</Button>
         </Modal.Footer>
       </div>
     </Modal>
