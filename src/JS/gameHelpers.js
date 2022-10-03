@@ -5,7 +5,7 @@ export const MAGT2 = 50;
 export const MAGT3 = 25;
 export const MAGT4 = 15;
 export const MAGT5 = 10;
-export const DEV_MODE = true;//DEV MODE
+export const DEV_MODE = false; //DEV MODE
 
 export const createStage = () =>
   Array.from(Array(STAGE_HEIGHT), () =>
