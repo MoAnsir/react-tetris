@@ -10,19 +10,9 @@ import { useInterval } from "../Hooks/useInterval";
 import { usePlayer } from "../Hooks/usePlayer";
 import { useStage } from "../Hooks/useStage";
 import { useGameStatus } from "../Hooks/useGameStatus";
-import {
-  createStage,
-  checkCollision,
-  MAGT1,
-  MAGT2,
-  MAGT3,
-  MAGT4,
-  MAGT5,
-} from "../JS/gameHelpers";
+import { createStage, checkCollision, MAGT1, MAGT2, MAGT3, MAGT4, MAGT5 } from "../JS/gameHelpers";
 import "../CSS/Tetris.scss";
 import { get, set } from "idb-keyval";
-
-// Add in highest score. Save to local storage and have it persist on machine.
 
 const Tetris = () => {
   const [dropTime, setDropTime] = useState(null);
@@ -34,8 +24,7 @@ const Tetris = () => {
   const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
   const [showModal, setShowModal] = useState(false);
   const [stage, setStage, rowsCleared] = useStage(player, resetPlayer);
-  const [score, setScore, rows, setRows, level, setLevel] =
-    useGameStatus(rowsCleared);
+  const [score, setScore, rows, setRows, level, setLevel] = useGameStatus(rowsCleared);
 
   useEffect(() => {
     get("Tetris-Score").then((val) => {
@@ -135,13 +124,7 @@ const Tetris = () => {
   }, dropTime);
 
   return (
-    <div
-      className="tetrisWrapper"
-      role="button"
-      tabIndex="0"
-      onKeyDown={(e) => move(e)}
-      onKeyUp={downKeyRelease}
-    >
+    <div className="tetrisWrapper" role="button" tabIndex="0" onKeyDown={(e) => move(e)} onKeyUp={downKeyRelease}>
       <div className="tetris">
         <Stage stage={stage} />
         <aside>
@@ -163,13 +146,7 @@ const Tetris = () => {
           <StartButton callback={startGame} />
         </aside>
       </div>
-      <UserNameModal
-        showModal={showModal}
-        hideModal={setShowModal}
-        userScore={highestScore}
-        userSaveData={userSaveData}
-        setUserSaveData={setUserSaveData}
-      />
+      <UserNameModal showModal={showModal} hideModal={setShowModal} userScore={highestScore} userSaveData={userSaveData} setUserSaveData={setUserSaveData} />
     </div>
   );
 };
