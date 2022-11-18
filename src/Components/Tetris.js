@@ -104,17 +104,17 @@ const Tetris = () => {
 
   const move = ({ keyCode }) => {
     if (!gameOver) {
-      if (keyCode === 75) {
-        //K - left
+      if (keyCode === 37) {
+        //Left Arrow - left
         movePlayer(-1);
-      } else if (keyCode === 76) {
-        //L - right
+      } else if (keyCode === 39) {
+        //Right Arrow - right
         movePlayer(1);
-        // } else if (keyCode === 74) {
-        //   //J - down
-        //   dropPlayer();
-      } else if (keyCode === 65) {
-        //A - rotate
+      } else if (keyCode === 40) {
+        //Down Arrow - down
+        dropPlayer();
+      } else if (keyCode === 38) {
+        //Up Arrow - rotate
         playerRotate(stage, 1);
       }
     }
