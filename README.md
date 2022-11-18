@@ -8,6 +8,7 @@ The aim for this project was to create a Tetris game. It has many types of block
 * React 18.2.0
 * bootstrap 5.2.0
 * idb-keyval 6.2.0
+* lodash 4.17.21
 
 <br />
 <br />
